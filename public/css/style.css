@@ -1,0 +1,39 @@
+/* Card Layout */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.listing-link {
+    text-decoration: none;
+    color: #222222;
+}
+
+.card-body {
+    padding: 0 !important;
+    margin-top: 0.5rem;
+}
+
+/* Card Hover effect */
+.listing-card:hover .card-img-top {
+    transform: scale(0.98);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Footer alignment */
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

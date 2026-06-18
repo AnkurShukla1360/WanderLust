@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-white sticky-top custom-navbar">
+    <div class="container-fluid px-4 py-2">
+        
+        <a class="navbar-brand fs-4 fw-bold brand-logo" href="/" style="color: #ff385c;">
+            <i class="fa-solid fa-compass me-2"></i>WanderLust
+        </a>
+
+        <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            
+            <div class="navbar-nav mx-auto mt-3 mt-lg-0">
+                <div class="d-none d-lg-flex align-items-center rounded-pill border py-2 px-3 shadow-sm hover-shadow cursor-pointer">
+                    <span class="fw-semibold px-3 border-end">Anywhere</span>
+                    <span class="fw-semibold px-3 border-end">Any week</span>
+                    <span class="text-muted px-3">Add guests</span>
+                    <div class="bg-brand rounded-circle text-white d-flex justify-content-center align-items-center ms-2 search-icon-btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-nav ms-auto align-items-center gap-3 mt-3 mt-lg-0">
+                <a class="nav-link fw-semibold rounded-pill hover-bg px-3 py-2" href="/listings/new">Add New Listing</a>
+                
+                <% if(!currUser) { %>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-outline-dark rounded-pill fw-bold px-4" href="/login">Log in</a>
+                        <a class="btn btn-brand rounded-pill fw-bold px-4 text-white" href="/signup">Sign up</a>
+                    </div>
+                <% } else { %>
+                    <div class="dropdown">
+                        <button class="btn border rounded-pill d-flex align-items-center gap-2 shadow-sm hover-shadow px-3 py-2 bg-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bars text-muted"></i>
+                            <div class="bg-secondary rounded-circle d-flex justify-content-center align-items-center text-white" style="width: 32px; height: 32px;">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-4 mt-2 p-2">
+                            <li><span class="dropdown-item-text fw-bold border-bottom mb-2 pb-2">Hi, <%= currUser.username %>!</span></li>
+                            <li><a class="dropdown-item fw-semibold rounded-2" href="/listings">Explore Listings</a></li>
+                            <li><a class="dropdown-item fw-semibold rounded-2" href="/listings/new">Add New Listing</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item fw-semibold text-danger rounded-2" href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i>Log out</a></li>
+                        </ul>
+                    </div>
+                <% } %>
+                
+            </div>
+        </div>
+    </div>
+</nav>
