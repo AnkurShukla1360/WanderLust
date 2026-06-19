@@ -1,8 +1,7 @@
+// Dotenv config sabse upar hona zaroori hai
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-
-
 
 const express = require("express");
 const app = express();
@@ -27,7 +26,13 @@ const listingsRouter = require("./routes/listing");
 const userRouter = require("./routes/user");
 const reviewsRouter = require("./routes/review"); 
 
-dburl = process.env.ATLASDB_URL;
+// DB URL
+const dburl = process.env.ATLASDB_URL;
+
+if (!dburl) {
+    console.error("FATAL ERROR: ATLASDB_URL is not defined! Render dashboard mein env variables check karo.");
+    process.exit(1);
+}
 
 async function main() {
     await mongoose.connect(dburl);
@@ -44,23 +49,23 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-
+// Mongo Store for sessions
 const store = MongoStore.create({
     mongoUrl: dburl,
     touchAfter: 24 * 60 * 60, // 24 hours
     crypto: {
-        secret : process.env.SECRET,
+        secret : process.env.SECRET || "backupsecret",
     },
 });
-
 
 store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e);
 });
+
 // Session Options
 const sessionOptions = {
     store: store,
-    secret: process.env.SECRET,
+    secret: process.env.SECRET || "backupsecret",
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -69,9 +74,6 @@ const sessionOptions = {
         httpOnly: true,
     },
 };
-
-
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -93,14 +95,14 @@ app.use((req, res, next) => {
 
 // Routes
 app.get("/", (req, res) => {
-    res.redirect("/listings"); // Root ko listings pe bhej diya
+    res.redirect("/listings"); 
 });
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
 
-// 404 Error handler (EXPRESS 5 FIX: '*' ki jagah directly app.use lagaya hai)
+// 404 Error handler
 app.use((req, res, next) => {
     res.status(404).send("Page Not Found!");
 });

@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-userSchema.plugin(passportLocalMongoose);
+// Fix for Render/Mongoose Plugin Error
+const plugin = passportLocalMongoose.default || passportLocalMongoose;
+userSchema.plugin(plugin);
 
 module.exports = mongoose.model("User", userSchema);
