@@ -52,10 +52,7 @@ app.use(methodOverride("_method"));
 // Mongo Store for sessions
 const store = MongoStore.create({
     mongoUrl: dburl,
-    touchAfter: 24 * 60 * 60, // 24 hours
-    crypto: {
-        secret : process.env.SECRET || "backupsecret",
-    },
+    touchAfter: 24 * 60 * 60 // 24 hours
 });
 
 store.on("error", function (e) {
