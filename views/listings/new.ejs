@@ -1,16 +1,68 @@
-<% layout("layouts/boilerplate") %>
+<!-- <% layout("layouts/boilerplate") %>
 <div class="row mt-4">
     <div class="col-8 offset-2">
         <h3>Create a New Listing</h3>
-        <form method="POST" action="/listings" novalidate class="needs-validation">
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input name="listing[title]" class="form-control" required type="text">
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image URL</label>
-                <input name="listing[image][url]" class="form-control" required type="text">
+                <label for="image" class="form-label">Upload Image (File)</label>
+                <input type="file" name="listing[image]" class="form-control" id="image">
             </div>
+            <div class="mb-3">
+                <label for="imageLink" class="form-label">Or Paste Image URL</label>
+                <input type="text" name="listing[imageLink]" class="form-control" placeholder="https://..." id="imageLink">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input name="listing[price]" class="form-control" required type="number">
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input name="listing[country]" class="form-control" required type="text">
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input name="listing[location]" class="form-control" required type="text">
+            </div>
+            <button class="btn btn-dark">Add</button>
+        </form>
+    </div>
+</div> -->
+
+
+
+<% layout("layouts/boilerplate") %>
+<div class="row mt-4">
+    <div class="col-8 offset-2">
+        <h3>Create a New Listing</h3>
+        
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+            
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="listing[title]" class="form-control" required type="text">
+            </div>
+
+            <!-- NEW CODE ADDED: Tumhari file me ye Description wala box miss ho gaya tha -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" class="form-control" required></textarea>
+            </div>
+            <!-- NEW CODE ADDED END -->
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image (File)</label>
+                <input type="file" name="listing[image]" class="form-control" id="image">
+            </div>
+
+            <div class="mb-3">
+                <label for="imageLink" class="form-label">Or Paste Image URL</label>
+                <input type="text" name="listing[imageLink]" class="form-control" placeholder="https://..." id="imageLink">
+            </div>
+
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
                 <input name="listing[price]" class="form-control" required type="number">
